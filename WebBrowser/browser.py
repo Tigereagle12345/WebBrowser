@@ -17,7 +17,13 @@ search = search.split("-")
 
 print("Results for " + str(ori_search))
 for word in search:
-  print
+  if not word in siteindex.keys():
+    print("Error, word " + word + " doesn't exist.")
+  else:
+    for url in siteindex[word].keys()
+    print(url)
+
+url = input("What site would you like to visit (Make sure to answer with the exact URL)? \n")
 
 page = "file:///"+os.getcwd()+"/" + url + ".html"
 webbrowser.open_new_tab(filename)
