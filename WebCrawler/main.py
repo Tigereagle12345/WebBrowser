@@ -1,12 +1,18 @@
 import selenium
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-from ./Wordlist/wordlist import words
 
 # Selenium Setup
 driver = webdriver.Chrome(ChromeDriverManager().install())
 chrome_url = "https://www.google.com/"
 driver.get(chrome_url)
+
+# Other setup
+words = []
+wordlist = open("./Wordlist/wordlist1")
+for word in wordlist:
+  if word not in words:
+    words.append(word)
 
 # Functions
 def robots():
