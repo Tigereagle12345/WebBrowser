@@ -1,18 +1,13 @@
 import selenium
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+from database import *
 
 # Selenium Setup
 driver = webdriver.Chrome(ChromeDriverManager().install())
 chrome_url = "https://www.google.com/"
 driver.get(chrome_url)
-
-# Other setup
-words = []
-wordlist = open("./Wordlist/wordlist1")
-for word in wordlist:
-  if word not in words:
-    words.append(word)
+search_url = "https://www.google.com/search?q="
 
 # Functions
 def robots():
@@ -28,4 +23,15 @@ def robots():
 def storedata(word):
   url = driver.current_url
   source = driver.page_source
+  
+
+# Start
+wordlist = open("./Wordlist/wordlist.txt", "r")
+for line in wordlist:
+  if line != "":
+    driver.get(search_url + line)
+    links = driver.find_elements_by_tag_name("a")
+    for link in links:
+      print(link.get_attribute(href))
+      driver.get
   
