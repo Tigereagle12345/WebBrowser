@@ -24,9 +24,8 @@ def robots():
 def storedata(word):
   url = driver.current_url
   source = driver.page_source
-  siteindex[word]["url"] = url
-  siteindex[word]["url"]["sourcefile"] = str(url) + ".html"
-  file = open("../Database/" + str(siteindex[word]["url"]["sourcefile"]), "w")
+  siteindex[word][url]["sourcefile"] = str(url) + ".html"
+  file = open("../Database/" + str(siteindex[word][url]["sourcefile"]), "w")
   file.write(source)
   file.close
   
