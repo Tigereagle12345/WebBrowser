@@ -2,6 +2,7 @@ import selenium
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from database import *
+import json
 
 # Selenium Setup
 driver = webdriver.Chrome(ChromeDriverManager().install())
@@ -23,15 +24,28 @@ def robots():
 def storedata(word):
   url = driver.current_url
   source = driver.page_source
+  siteindex[word]["url"] = url
+  siteindex[word]["url"]["sourcefile"] = str(url) + ".html"
+  file = open("../Database/" + str(siteindex[word]["url"]["sourcefile"]), "w")
+  file.write(source)
+  file.close
+  
+  file = open("database.py", "w")
+  file.close
+  file = open("database.py", "w")
+  file.write(json.dumps(siteindex))
+  file.close
   
 
 # Start
 wordlist = open("./Wordlist/wordlist.txt", "r")
-for line in wordlist:
-  if line != "":
-    driver.get(search_url + line)
+for word in wordlist:
+  if word != "":
+    driver.get(search_url + word)
     links = driver.find_elements_by_tag_name("a")
     for link in links:
-      print(link.get_attribute(href))
-      driver.get
+      the_url = link.get_attribute(href)
+      driver.get(the_url)
+      storedata(word)
+      
   
